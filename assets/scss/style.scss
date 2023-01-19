@@ -184,6 +184,66 @@ table {
     background-color: #666;
 }
 
+// Toggle spoiler buttons
+
+.spoiler {
+  margin-bottom: .5em;
+}
+
+.spoiler .spoiler-header {
+  display: flex;
+  color: #eee;
+  background: #6b6f79;
+  padding: 3px;
+  cursor: pointer;
+}
+
+.spoiler .spoiler-icon {
+  margin-right: .3em;
+}
+
+.spoiler .spoiler-title:hover {
+  text-decoration: underline;
+}
+
+.spoiler-content {
+  border-width: 0px 3px 3px 3px;
+  border-color: #6b6f79;
+  border-style: solid;
+  padding: 3px;
+}
+
+.spoiler-content.hidden {
+  display: none;
+}
+
+.spoiler-content.remove-spacing {
+  padding: 0;
+}
+
+.spoiler-content.remove-spacing pre {
+  margin: 0;
+  border-radius: 0;
+}
+
+.toggle-spoiler-btn {
+  border: 0;
+  border-radius: 4px;
+  padding: 1px 15px;
+  font-size: 0.7em;
+  line-height: 1.8;
+  color: #fff;
+  background-color: $light-grey;
+  opacity: 0.6;
+  margin-left: auto;
+  text-align: center;
+  cursor: pointer;
+}
+
+.toggle-spoiler-btn:hover {
+  background-color: $dark-grey;
+}
+
 // Accessibility
 //
 .screen-reader-text {

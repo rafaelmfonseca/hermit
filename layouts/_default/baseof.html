@@ -31,15 +31,18 @@
 	{{ block "main" . -}}{{ end -}}
 	{{ block "footer" . -}}{{ end }}
 
-	{{ $main := resources.Get "js/main.js" -}}
-	{{ if .Site.Params.code_copy_button | default true -}}
-		{{ $codeCopy := resources.Get "js/code-copy.js" -}}
-		{{ $script := slice $main $codeCopy | resources.Concat "js/bundle.js" | minify | fingerprint -}}
-		<script src="{{ $script.Permalink }}" {{ printf "integrity=%q" $script.Data.Integrity | safeHTMLAttr }} crossorigin="anonymous"></script>
-	{{ else -}}
-		{{ $script := $main | minify | fingerprint -}}
-		<script src="{{ $script.Permalink }}" {{ printf "integrity=%q" $script.Data.Integrity | safeHTMLAttr }} crossorigin="anonymous"></script>
+	{{ if .Site.Params.code_copy_button | default true }}
+		{{ $codeCopyScript := resources.Get "js/code-copy.js" | minify | fingerprint -}}
+		<script src="{{ $codeCopyScript.Permalink }}" {{ printf "integrity=%q" $codeCopyScript.Data.Integrity | safeHTMLAttr }} crossorigin="anonymous"></script>
 	{{ end }}
+
+	{{ if .Site.Params.spoiler_button | default true }}
+		{{ $spoilerScript := resources.Get "js/spoiler.js" | minify | fingerprint -}}
+		<script src="{{ $spoilerScript.Permalink }}" {{ printf "integrity=%q" $spoilerScript.Data.Integrity | safeHTMLAttr }} crossorigin="anonymous"></script>
+	{{ end }}
+
+	{{ $mainScript := resources.Get "js/main.js" | minify | fingerprint -}}
+	<script src="{{ $mainScript.Permalink }}" {{ printf "integrity=%q" $mainScript.Data.Integrity | safeHTMLAttr }} crossorigin="anonymous"></script>
 
 	{{- partial "analytics.html" . }}
 	{{- if templates.Exists "partials/extra-foot.html" -}}
